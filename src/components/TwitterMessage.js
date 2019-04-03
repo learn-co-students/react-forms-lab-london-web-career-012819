@@ -1,17 +1,28 @@
 import React from "react";
 
 class TwitterMessage extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
+    //this.props.maxChars
+    this.state = {
+      tweet: '',
+      count: props.maxChars
+    };
+  }
 
-    this.state = {};
+  handleChange = (event) => {
+    this.setState({
+      tweet: event.target.value,
+      count: this.state.count - 1
+    })
   }
 
   render() {
     return (
       <div>
         <strong>Your message:</strong>
-        <input type="text" name="message" id="message" />
+        <input type="text" name="message" id="message" value={this.state.tweet} onChange={(event) => this.handleChange(event)}/>
+        <p>{this.state.count}</p>
       </div>
     );
   }
